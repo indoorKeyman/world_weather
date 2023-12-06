@@ -295,7 +295,6 @@ function Weather() {
 
             <SearchBtn
               onClick={() => {
-                console.log("리패치");
                 refetch();
               }}
             >
