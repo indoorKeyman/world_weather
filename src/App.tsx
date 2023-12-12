@@ -79,7 +79,6 @@ function App() {
     <>
       <ThemeProvider theme={lightTheme}>
         <Globalstyle />
-
         <Weather />
       </ThemeProvider>
     </>

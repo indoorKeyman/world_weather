@@ -185,6 +185,12 @@ const WindSpeedP = styled.p`
   font-weight: 500;
 `;
 
+const CountryCode = styled.p`
+  font-size: 14px;
+  color: #31304d;
+  font-weight: 500;
+`;
+
 interface Iweather {
   weather: [
     {
@@ -198,6 +204,10 @@ interface Iweather {
   main: {
     humidity: number;
     temp: number;
+  };
+
+  sys: {
+    country: string;
   };
 
   wind: {
@@ -286,7 +296,7 @@ function Weather() {
       <Container>
         <MainBox variants={mainboxVariants} initial="start" animate="end">
           <SearchBox>
-            <FontAwesomeIcon icon={faLocationDot} />
+            <FontAwesomeIcon size="xl" icon={faLocationDot} />
             <SearchInput
               {...register("ct")}
               onKeyDown={(e) => (e.key === "Enter" ? refetch() : null)}
@@ -310,10 +320,14 @@ function Weather() {
           ) : (
             <>
               <WeahterBox>
-                <WeahterImg src={imgSrc} alt="weather image" />
-
+                <a
+                  href="https://www.flaticon.com/free-icons/rain"
+                  title="rain icons"
+                >
+                  <WeahterImg src={imgSrc} alt="weather image" />
+                </a>
                 <Temperature>
-                  {parseInt(data.main.temp + "") - 275}
+                  {parseInt(data.main.temp.toFixed())}
                   <TemperatureS>°C</TemperatureS>
                 </Temperature>
                 <Description>{data?.weather[0].description}</Description>
@@ -339,6 +353,7 @@ function Weather() {
                   </WindSpeedR>
                 </WindSpeed>
               </WeatherDetail>
+              <CountryCode>Country Code : {data.sys.country}</CountryCode>
             </>
           )}
         </MainBox>
